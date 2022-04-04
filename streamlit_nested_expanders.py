@@ -6,7 +6,7 @@ from streamlit import legacy_caching
 from streamlit import type_util
 from streamlit import util
 from streamlit.cursor import Cursor
-from streamlit.script_run_context import get_script_run_ctx
+# from streamlit.script_run_context import get_script_run_ctx
 from streamlit.errors import StreamlitAPIException
 from streamlit.errors import NoSessionContext
 from streamlit.proto import Block_pb2
@@ -109,14 +109,14 @@ def _block(self, block_proto=Block_pb2.Block()) -> "DeltaGenerator":
     return block_dg
 
 
-def _enqueue_message(msg):
-    """Enqueues a ForwardMsg proto to send to the app."""
-    ctx = get_script_run_ctx()
+# def _enqueue_message(msg):
+#     """Enqueues a ForwardMsg proto to send to the app."""
+#     ctx = get_script_run_ctx()
 
-    if ctx is None:
-        raise NoSessionContext()
+#     if ctx is None:
+#         raise NoSessionContext()
 
-    ctx.enqueue(msg)
+#     ctx.enqueue(msg)
 
 
 DeltaGenerator._block = _block
