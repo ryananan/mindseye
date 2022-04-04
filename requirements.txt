@@ -1,5 +1,2 @@
--master file
-requirements.txt
 torch
-torchvision
 streamlit
