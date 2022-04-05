@@ -16,12 +16,7 @@ pandas==1.1.3
 pathvalidate==2.5.0
 Pillow==9.1.0
 requests==2.24.0
-streamlit==1.8.1
+streamlit==1.7.0
 timm==0.5.4
 torch==1.11.0
 torchvision==0.12.0
-wget==3.2
-fvcore iopath lpips datetime timm ftfy
-pytorch-lightning
-einops
-stqdm
