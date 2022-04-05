@@ -311,7 +311,7 @@ with settings:
                     # "Negative Prompt",
                     # "Better Quality",
                 ],
-                index=3,
+                index=2,
             )
             mse = col1.checkbox(
                 "Enable MSE regularization",
