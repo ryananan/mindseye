@@ -79,7 +79,6 @@ sys.path.append(".")
 sys.path.append("./taming-transformers")
 sys.path.append("./disco-diffusion")
 sys.path.append("./AdaBins")
-sys.path.append('./pytorch3d-lite')
 # sys.path.append('./pytorch3d')
 
 import os
@@ -154,7 +153,7 @@ from midas.midas_net import MidasNet
 from midas.midas_net_custom import MidasNet_small
 from midas.transforms import Resize, NormalizeImage, PrepareForNet
 import torch
-import py3d_tools as p3dT
+import pytorch3d.transforms as p3dT
 import disco_xform_utils as dxf
 import argparse
 
