@@ -118,7 +118,7 @@ from torch.nn import functional as F
 from torchvision import transforms
 from torchvision.transforms import functional as TF
 import torchvision.transforms as T
-#from stqdm import stqdm
+from stqdm import stqdm
 
 # from tqdm.notebook import tqdm
 from CLIP import clip
@@ -127,7 +127,6 @@ import numpy as np
 import subprocess
 import imageio
 from PIL import ImageFile, Image
-import time
 
 # ImageFile.LOAD_TRUNCATED_IMAGES = True
 import hashlib
@@ -1695,22 +1694,20 @@ def run_model(args2, status, stoutput, DefaultPaths):
                 # self.z.copy_(self.z.maximum(self.z_min).minimum(self.z_max))
 
         def run(self, x):
-            j = 0
+            i = 0
             status.write("Starting the execution...")
             try:
                 # pbar = tqdm(range(int(args.max_iterations + args.mse_end)))
-                before_start_time = time.perf_counter()
-                bar_container = status.container()
-                iteration_counter = bar_container.empty()
-                progress_bar = bar_container.progress(0)
-                total_steps = int(args.max_iterations + args.mse_end) - 1
-                for _ in range(total_steps):
-                    if j == 0:
-                        iteration_counter.empty()
+                for _ in stqdm(
+                    range(int(args.max_iterations + args.mse_end)),
+                    st_container=stoutput,
+                ):
+                    if i == 0:
+                        status.empty()
                         imageLocation = stoutput.empty()
-                    self.train(j, x)
+                    self.train(i, x)
                     imageLocation.image(Image.open(args2.image_file))
-                    if j > 0 and j % args.mse_decay_rate == 0 and self.mse_weight > 0:
+                    if i > 0 and i % args.mse_decay_rate == 0 and self.mse_weight > 0:
                         self.z = EMATensor(self.z.average, args.ema_val)
                         self.opt = torch.optim.AdamW(
                             self.z.parameters(),
@@ -1718,20 +1715,11 @@ def run_model(args2, status, stoutput, DefaultPaths):
                             weight_decay=0.00000000,
                         )
                         # self.opt = optim.Adgarad(self.z.parameters(), lr=args.mse_step_size, weight_decay=0.00000000)
-                    if j >= total_steps:
+                    if i >= args.max_iterations + args.mse_end:
                         # pbar.close()
                         break
                     self.z.update()
-                    j += 1
-                    time_past_seconds = time.perf_counter() - before_start_time
-                    iterations_per_second = j / time_past_seconds
-                    time_left = (total_steps - j) / iterations_per_second
-                    percentage = round((j / (total_steps + 1)) * 100)
-
-                    iteration_counter.write(
-                        f"{percentage}% {j}/{total_steps+1} [{time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(iterations_per_second,2)} it/s]"
-                    )
-                    progress_bar.progress(int(percentage))
+                    i += 1
                 import shutil
                 import os
 
@@ -1766,7 +1754,7 @@ def run_model(args2, status, stoutput, DefaultPaths):
                 status.write("Done!")
                 pass
             imageLocation.empty()
-            return j
+            return i
 
     def add_noise(img):
 
