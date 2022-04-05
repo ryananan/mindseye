@@ -20,3 +20,8 @@ streamlit==1.8.1
 timm==0.5.4
 torch==1.11.0
 torchvision==0.12.0
+wget==3.2
+fvcore iopath lpips datetime timm ftfy
+pytorch-lightning
+einops
+stqdm
