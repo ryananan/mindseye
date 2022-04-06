@@ -723,6 +723,7 @@ def run_model(args2, status, stoutput, DefaultPaths):
                 if frame_num > 0:
                     seed = seed + 1
                     if resume_run and frame_num == start_frame:
+                        save_settings()
                         img_0 = cv2.imread(
                             batchFolder
                             + f"/{batch_name}({batchNum})_{start_frame-1:04}.png"
@@ -1442,7 +1443,7 @@ def run_model(args2, status, stoutput, DefaultPaths):
             "turbo_mode": turbo_mode,
             "turbo_steps": turbo_steps,
         }
-        # print('Settings:', setting_list)
+        print('Settings:', setting_list)
         with open(
             f"{batchFolder}/{batch_name}({batchNum})_settings.txt", "w+"
         ) as f:  # save settings
