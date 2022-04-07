@@ -2491,8 +2491,8 @@ def run_model(args2, status, stoutput, DefaultPaths):
 
     args = SimpleNamespace(**args)
 
+    print(args)
     print("Prepping model...")
-    save_settings()
     model, diffusion = create_model_and_diffusion(**model_config)
     model.load_state_dict(
         torch.load(
@@ -2509,6 +2509,9 @@ def run_model(args2, status, stoutput, DefaultPaths):
     sys.stdout.write("Starting ...\n")
     sys.stdout.flush()
     status.write(f"Starting ...\n")
+
+    save_settings()
+
 
     gc.collect()
     torch.cuda.empty_cache()
