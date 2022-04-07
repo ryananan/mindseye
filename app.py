@@ -114,9 +114,9 @@ st.write(
 page_names = ["CLIP Guided Diffusion", "VQGAN+CLIP"]
 
 if "width" not in st.session_state:
-    st.session_state["width"] = 448
+    st.session_state["width"] = 512
 if "height" not in st.session_state:
-    st.session_state["height"] = 256
+    st.session_state["height"] = 512
 if "seed" not in st.session_state:
     init_seed = int(random.randint(0, 2147483647))
     st.session_state.seed = init_seed
@@ -211,7 +211,7 @@ with settings:
         width = int(
             col2.number_input(
                 "width",
-                value=448,
+                value=512,
                 max_value=None,
                 step=1,
                 help="Width of the generated image. If you don't have Colab Pro probably don't go higher than 512px",
@@ -220,7 +220,7 @@ with settings:
         height = int(
             col3.number_input(
                 "height",
-                value=256,
+                value=512,
                 max_value=None,
                 step=1,
                 help="Height of the generated image. If you don't have Colab Pro probably don't go higher than 512px",
