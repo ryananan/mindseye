@@ -2480,9 +2480,11 @@ def run_model(args2, status, stoutput, DefaultPaths):
         }
         print('Settings:', setting_list)
         with open(
-            f"{batchFolder}/{batch_name}({batchNum})_settings.txt", "w+"
+            f"{DefaultPaths.output_path}/{sanitize_filename(args2.prompt)} [Disco Diffusion v5] {args2.seed}_settings.txt", "w+"
         ) as f:  # save settings
             json.dump(setting_list, f, ensure_ascii=False, indent=4)
+            print("Setting save CONFIRM!!")
+        
 
     save_settings()
 
