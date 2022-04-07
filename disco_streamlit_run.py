@@ -1237,6 +1237,7 @@ def run_model(args2, status, stoutput, DefaultPaths):
                             """
                             if itt % args2.update == 0 or cur_t == -1 or itt == 1:
                                 for k, image in enumerate(sample["pred_xstart"]):
+                                    save_settings()
                                     sys.stdout.flush()
                                     sys.stdout.write("Saving progress ...\n")
                                     sys.stdout.flush()
