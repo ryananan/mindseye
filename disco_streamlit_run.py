@@ -1237,7 +1237,6 @@ def run_model(args2, status, stoutput, DefaultPaths):
                             """
                             if itt % args2.update == 0 or cur_t == -1 or itt == 1:
                                 for k, image in enumerate(sample["pred_xstart"]):
-                                    save_settings()
                                     sys.stdout.flush()
                                     sys.stdout.write("Saving progress ...\n")
                                     sys.stdout.flush()
@@ -2493,6 +2492,7 @@ def run_model(args2, status, stoutput, DefaultPaths):
     args = SimpleNamespace(**args)
 
     print("Prepping model...")
+    save_settings()
     model, diffusion = create_model_and_diffusion(**model_config)
     model.load_state_dict(
         torch.load(
