@@ -2413,6 +2413,16 @@ def run_model(args2, status, stoutput, DefaultPaths):
         "rand_mag": rand_mag,
     }
 
+    def save_settings(args):
+        print('Settings:', str(args))
+        print("Setting SAVE!!")
+        with open(
+            f"{DefaultPaths.output_path}/{sanitize_filename(args2.prompt)} [Disco Diffusion v5] {args2.seed}_settings.txt", "w+"
+        ) as f:  # save settings
+            json.dump(str(args), f, ensure_ascii=False, indent=4)
+            print("Setting SAVE CONFIRM!!")
+
+    save_settings(args)
     args = SimpleNamespace(**args)
 
     print(args)
@@ -2430,20 +2440,11 @@ def run_model(args2, status, stoutput, DefaultPaths):
     if model_config["use_fp16"]:
         model.convert_to_fp16()
 
-    sys.stdout.write("StartingXXXX ...\n")
+    sys.stdout.write("Starting ...\n")
     sys.stdout.flush()
     status.write(f"Starting ...\n")
 
-    def save_settings(args):
-        print('Settings:', str(args))
-        print("Setting SAVE!!")
-        with open(
-            f"{DefaultPaths.output_path}/{sanitize_filename(args2.prompt)} [Disco Diffusion v5] {args2.seed}_settings.txt", "w+"
-        ) as f:  # save settings
-            json.dump(str(args), f, ensure_ascii=False, indent=4)
-            print("Setting SAVE CONFIRM!!")
 
-    save_settings(args)
 
 
     gc.collect()
