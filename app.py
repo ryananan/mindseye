@@ -211,7 +211,7 @@ with settings:
         width = int(
             col2.number_input(
                 "width",
-                value=512,
+                value=448,
                 max_value=None,
                 step=1,
                 help="Width of the generated image. If you don't have Colab Pro probably don't go higher than 512px",
@@ -220,7 +220,7 @@ with settings:
         height = int(
             col3.number_input(
                 "height",
-                value=512,
+                value=256,
                 max_value=None,
                 step=1,
                 help="Height of the generated image. If you don't have Colab Pro probably don't go higher than 512px",
