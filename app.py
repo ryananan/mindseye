@@ -114,9 +114,9 @@ st.write(
 page_names = ["CLIP Guided Diffusion", "VQGAN+CLIP"]
 
 if "width" not in st.session_state:
-    st.session_state["width"] = 512
+    st.session_state["width"] = 448
 if "height" not in st.session_state:
-    st.session_state["height"] = 512
+    st.session_state["height"] = 256
 if "seed" not in st.session_state:
     init_seed = int(random.randint(0, 2147483647))
     st.session_state.seed = init_seed
