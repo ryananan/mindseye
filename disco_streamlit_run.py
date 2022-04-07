@@ -1375,6 +1375,7 @@ def run_model(args2, status, stoutput, DefaultPaths):
 
     def save_settings(args):
         print('Settings:', str(args))
+        print("Setting SAVE!!")
         with open(
             f"{DefaultPaths.output_path}/{sanitize_filename(args2.prompt)} [Disco Diffusion v5] {args2.seed}_settings.txt", "w+"
         ) as f:  # save settings
