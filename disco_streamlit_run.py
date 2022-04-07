@@ -1373,14 +1373,6 @@ def run_model(args2, status, stoutput, DefaultPaths):
                 status.write("Done!")
                 plt.plot(np.array(loss_values), "r")
 
-    def save_settings(args):
-        print('Settings:', str(args))
-        print("Setting SAVE!!")
-        with open(
-            f"{DefaultPaths.output_path}/{sanitize_filename(args2.prompt)} [Disco Diffusion v5] {args2.seed}_settings.txt", "w+"
-        ) as f:  # save settings
-            json.dump(str(args), f, ensure_ascii=False, indent=4)
-
     # @title 1.6 Define the secondary diffusion model
 
     def append_dims(x, n):
@@ -2420,6 +2412,15 @@ def run_model(args2, status, stoutput, DefaultPaths):
         "fuzzy_prompt": fuzzy_prompt,
         "rand_mag": rand_mag,
     }
+
+    def save_settings(args):
+        print('Settings:', str(args))
+        print("Setting SAVE!!")
+        with open(
+            f"{DefaultPaths.output_path}/{sanitize_filename(args2.prompt)} [Disco Diffusion v5] {args2.seed}_settings.txt", "w+"
+        ) as f:  # save settings
+            json.dump(str(args), f, ensure_ascii=False, indent=4)
+            print("Setting SAVE CONFIRM!!")
 
     save_settings(args)
     args = SimpleNamespace(**args)
